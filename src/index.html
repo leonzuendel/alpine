@@ -1,0 +1,51 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title></title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="stylesheet" href="../assets/css/normalize.css">
+  <link rel="stylesheet" href="../assets/css/main.scss">
+
+  <script src="../assets/js/app.js" type="module"></script>
+</head>
+
+<body>
+<div class="container">
+  <div class="section">
+
+    <div x-data="counter" class="box">
+
+      <div class="field has-addons">
+
+        <div class="control is-expanded">
+          <input type="text" x-model="number" x-mask="9999999" x-ref="input" class="input is-fullwidth">
+        </div>
+
+        <div class="control">
+          <button @click="addToCount(number)" class="button is-success is-outlined">
+            Add to counter
+          </button>
+        </div>
+
+        <div class="control">
+          <button @click="resetCounter()" class="button is-danger is-outlined">
+            Reset counter
+          </button>
+        </div>
+
+      </div>
+
+      <p>Counter is <span x-text="count"></span></p>
+    </div>
+
+  </div>
+</div>
+
+<script src="../assets/js/vendor/modernizr-3.11.2.min.js"></script>
+</body>
+
+</html>
