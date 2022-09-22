@@ -1,7 +1,7 @@
 # alpine
 
 ## installation
-  yarn
+    yarn
 
 ## start parcel development server
-  yarn dev
+    yarn dev
