@@ -2,50 +2,124 @@
 <html>
 
 <head>
-  <meta charset="utf-8">
-  <title></title>
-  <meta name="description" content="">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <link rel="stylesheet" href="../assets/css/normalize.css">
-  <link rel="stylesheet" href="../assets/css/main.scss">
+    <link rel="stylesheet" href="../assets/css/normalize.css">
+    <link rel="stylesheet" href="../assets/css/main.scss">
 
-  <script src="../assets/js/app.js" type="module"></script>
+    <script src="../assets/js/app.ts" type="module"></script>
 </head>
 
 <body>
 <div class="container">
-  <div class="section">
 
-    <div x-data="counter" class="box">
+    <div class="section">
+        <h2 class="title is-2">Counter</h2>
+        <div x-data="counter" x-title="CounterComponent" class="box">
+            <div class="field has-addons">
+                <div class="control is-expanded">
+                    <input type="text" x-model="number" x-mask="9999999" class="input is-fullwidth">
+                </div>
 
-      <div class="field has-addons">
+                <div class="control">
+                    <button @click="addToCount(number)" class="button is-success is-outlined">
+                        Add to counter
+                    </button>
+                </div>
 
-        <div class="control is-expanded">
-          <input type="text" x-model="number" x-mask="9999999" x-ref="input" class="input is-fullwidth">
+                <div class="control">
+                    <button @click="resetCount()" class="button is-danger is-outlined">
+                        Reset counter
+                    </button>
+                </div>
+            </div>
+
+            <p>Counter is <span x-text="count"></span></p>
         </div>
-
-        <div class="control">
-          <button @click="addToCount(number)" class="button is-success is-outlined">
-            Add to counter
-          </button>
-        </div>
-
-        <div class="control">
-          <button @click="resetCounter()" class="button is-danger is-outlined">
-            Reset counter
-          </button>
-        </div>
-
-      </div>
-
-      <p>Counter is <span x-text="count"></span></p>
     </div>
 
-  </div>
+    <div class="section">
+        <h2 class="title is-2">Todos</h2>
+        <div x-data="todo" x-title="TodoComponent" class="box">
+            <div class="columns">
+                <div class="column">
+                    <div class="field has-addons">
+                        <div class="control is-expanded">
+                            <input type="text" x-model="newTodoTitle" class="input is-fullwidth">
+                        </div>
+
+                        <div class="control">
+                            <button @click="addTodo()" class="button is-success is-outlined">
+                                Add todo
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="column">
+                    <input type="text" x-model="searchText" placeholder="Search Todos" class="input is-fullwidth">
+                </div>
+            </div>
+
+            <div class="block" x-show="!searchText && (getTodoTodos().length > 0 || getDoneTodos().length > 0)">
+                <div x-show="getTodoTodos().length > 0" class="block">
+                    <template x-for="todo in getTodoTodos()" :key="todo.id">
+                        <div class="card mb-1">
+                            <div class="card-header">
+                                <p class="card-header-title">
+                                    <input type="checkbox" :checked="isTodoDone(todo.id)" @click="toggleTodo(todo.id)">
+                                    <span x-text="todo.title" class="ml-2"></span>
+                                </p>
+                                <div class="card-header-icon">
+                                    <button @click="deleteTodo(todo.id)" class="button is-danger">Delete</button>
+                                </div>
+                            </div>
+                        </div>
+                    </template>
+                </div>
+
+                <div x-show="getDoneTodos().length > 0" class="block">
+                    <h4 class="title is-4">Done Todos</h4>
+
+                    <template x-for="todo in getDoneTodos()" :key="todo.id">
+                        <div class="card mb-1">
+                            <div class="card-header">
+                                <p class="card-header-title">
+                                    <input type="checkbox" :checked="isTodoDone(todo.id)" @click="toggleTodo(todo.id)">
+                                    <span x-text="todo.title" class="ml-2"></span>
+                                </p>
+                                <div class="card-header-icon">
+                                    <button @click="deleteTodo(todo.id)" class="button is-danger">Delete</button>
+                                </div>
+                            </div>
+                        </div>
+                    </template>
+                </div>
+            </div>
+
+            <div class="block" x-show="searchText">
+                <template x-for="todo in getSearchTodos()" :key="todo.id">
+                    <div class="card mb-1">
+                        <div class="card-header">
+                            <p class="card-header-title">
+                                <input type="checkbox" :checked="isTodoDone(todo.id)" @click="toggleTodo(todo.id)">
+                                <span x-text="todo.title" class="ml-2"></span>
+                            </p>
+                            <div class="card-header-icon">
+                                <button @click="deleteTodo(todo.id)" class="button is-danger">Delete</button>
+                            </div>
+                        </div>
+                    </div>
+                </template>
+            </div>
+        </div>
+    </div>
+
 </div>
 
-<script src="../assets/js/vendor/modernizr-3.11.2.min.js"></script>
 </body>
 
 </html>

@@ -12,12 +12,15 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "devDependencies": {
+    "@types/alpinejs": "^3.7.0",
     "parcel": "^2.7.0",
     "parcel-bundler": "^1.12.4",
-    "sass": "^1.54.9"
+    "sass": "^1.54.9",
+    "typescript": "^4.8.3"
   },
   "dependencies": {
     "@alpinejs/mask": "^3.10.3",
+    "@alpinejs/persist": "^3.10.3",
     "alpinejs": "^3.10.3",
     "bulma": "^0.9.4"
   }
